@@ -41,7 +41,7 @@ Mz1 = 840 ;
 T1 = 400 ;
 
 Fx2 = -500 ;
-Mz2 = 700  ;
+Mz2 = 700  ; % should be negative
 T2 = 400 ;
 
 % Geometry
