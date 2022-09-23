@@ -15,12 +15,24 @@ F = 6000; % N
 Sut = 400; % MPa
 Sy = 220; % MPa
 
-% Material is machined
-
 % FOS = 1.5 for both infinite fatigue life & yielding
+stress_x_yield = Sy/1.5;
 
 % Max bending moment
 M = 45000;
+
+% Suitable pin diameter for yielding
+d_yield = ((32*M)/(pi*stress_x_yield))^(1/3);
+
+%Marin Factors
+% Surface factor, k_a
+% machine surface:
+a_surface = 3.04;
+b_surface = -0.217;
+k_a = a_surface*Sut^b_surface;
+
+% Suitable pin diameter for infinite fatigue life
+d_fatigue = ((pi*k_a*1.24)/(1.5*32*M))^(1/3.107);
 
 
 
