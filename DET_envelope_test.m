@@ -6,6 +6,7 @@ rho = Sy .* sqrt(1./(1-sin(theta).*cos(theta)));
 [x, y] = pol2cart(theta, rho);
 
 plot(x, y)
+axis square;
 grid on;
 
 xticks([-Sy, 0, Sy]);
