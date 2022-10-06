@@ -9,6 +9,9 @@ rho = Sy.*(1 - sin(theta).*cos(theta)).^-0.5;
 [x, y] = pol2cart(theta, rho);
 
 plot(x, y)
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
 axis square; % keep axes at same scale in window
 grid on;
 
