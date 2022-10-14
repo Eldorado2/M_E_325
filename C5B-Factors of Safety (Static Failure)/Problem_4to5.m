@@ -26,10 +26,10 @@ M_min = 0; % lbf-in
 Dd = D/d;
 rd = r/d;
 
-K_t = 2.2;
+K_t = 2.1;
 
-% Moment of intertia
-I = pi*d^4/64; % in^4
+% Moment of inertia
+I = (pi*d^4)/64; % in^4
 
 % Nominal bending stress
 c = d/2;
@@ -58,6 +58,40 @@ stress_min = K_f * stress_nom_min; % kpsi
 stress_a = (stress_max-stress_min)/2;
 stress_m = (stress_max+stress_min)/2;
 
-% Calculate rotating endurance limit
+% Calculate rotary-beam endurance limit
+S_e_prime = 0.5 * S_ut; % kpsi
 
+% Calculate Marin Factors
 
+% For the surface factor, k_a, the groove is machined
+a_surface = 2;
+b_surface = -0.217;
+
+k_a = a_surface*S_ut^b_surface;
+
+% For the size factor, k_b, the bar is in bending and is not rotating
+% because the specimen is not rotating, a critical diameter needs to be
+% calculated
+d_e = 0.370 * d; % in
+
+% 0.3<d_e<2 in
+k_b = 0.879*d_e^-0.107;
+
+% For the loading factor, k_c, the loading is in bending
+k_c = 1;
+
+% Temperature factor, operating temperature assumed to not have effect on
+% fatigue
+k_d = 1;
+
+% Reliability assumbed to be 50%
+k_e = 1;
+
+% Calculate endurance limit
+S_e = k_a*k_b*k_c*k_d*k_e*S_e_prime; % kpsi
+
+% Calculate factor of safety for fatigue using the goodman criterion
+n_f = (stress_a/S_e + stress_m/S_ut)^-1;
+
+%%%%% Problem 5 %%%%%
+% Is the same as 4...
