@@ -19,5 +19,5 @@ velocity_PL = (pi*diameter_p/12) * velocity_p; % ft/min
 load_t = 33000*power/velocity_PL; % lbf
 
 % Overload factor, 
-K_o = 
+
 
