@@ -9,7 +9,9 @@ d = 1/2;
 t_steel = 2; % in
 t_cast_iron = 1.25; % in
 H = 7/16; % in, from A-31 (d = 1/2)
-E_bolt = 30; % Mpsi
+W = 3/4; % in, from A-29 (d = 1/2)
+E_steel = 30; % Mpsi
+E_cast_iron = 14.5; % Mpsi
 
 L = t_cast_iron + t_steel + H;
 L = ceil(L / 0.25) * 0.25;
@@ -31,15 +33,19 @@ end
 l_d = L - L_t;
 l_t = l - l_d;
 
-k_b = (A_d*A_t*E_bolt) / (A_d*l_t + A_t*l_d); % Mlb/in
+k_b = (A_d*A_t*E_steel) / (A_d*l_t + A_t*l_d); % Mlb/in
 
 %%%%% Problem 9 %%%%%
 % Determine the material stiffness
 
-% stiffness of plates:
-k_steel = stiffness(d, t_steel, 30); % Mlb/in
+D_1 = W;
+D_2 = D_1 + 2*t_cast_iron*tand(30);
+D_3 = D_1 + 2*l/2*tand(30);
 
+% stiffness of frustra:
+%Stiffness cast iron section:
+k_1 = stiffness(D_1, )
 
-function k = stiffness(d, l, E)
-    k = 0.5774*pi*E / (2*log(5*(0.5774*l + 0.5*d) / (0.5774*l + 2.5*d)));
+function k = stiffness(d, D, t, E)
+    k = 0.5774*pi*E*d / log(((1.155*t+D-d)*(D+d)) / ((1.155*t+D+d)*(D-d)));
 end
